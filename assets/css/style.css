@@ -1,0 +1,36 @@
+.jumbotron {
+	background-color: black;
+	opacity: 0.5;
+}
+
+body{
+
+	background: url(../images/starBackground.jpg);
+
+}
+
+.img-responsive {
+	max-width: 100%;
+	height: 150px;
+	margin: 0 auto;
+}
+
+.row {
+	padding-bottom: 20px;
+}
+
+.panel {
+	background: none;
+}
+
+/*.panel-default {
+	background: none;
+}*/
+
+.panel-heading {
+	background: none;
+}
+
+h2 {
+	color: yellow;
+}

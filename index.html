@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron text-center">
+			<img src="assets/images/starWarsLogo.png">
+		</div>
+		
+	</div>
+<!-- <h1>Star Wars Game</h1> -->
+<!-- heroes -->
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">Light</h3>
+			</div>
+			<div class="panel-body">
+				<div class="text-center">
+					<div class="row light">
+						<div class="col-sm-4">
+							<img class="img-responsive d-print-inline-block" src="assets/images/lukeSkywalker.jpg">
+						</div>
+						<div class="col-sm-4">
+							<img class="img-responsive d-print-inline-block" src="assets/images/obiWanKenobi.jpg">
+						</div>
+						<div class="col-sm-4">
+							<img class="img-responsive d-print-inline-block" src="assets/images/yoda.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">Dark</h3>
+			</div>
+			<div class="panel-body">
+				<div class="text-center">
+		<!-- villains -->
+			<div class="row dark">
+				<div class="col-sm-4">
+					<img class="img-responsive d-print-inline-block" src="assets/images/stormTroopers.jpg">
+				</div>
+				<div class="col-sm-4">
+					<img class="img-responsive d-print-inline-block" src="assets/images/darthVader.jpg">
+				</div>
+				<div class="col-sm-4">
+					<img class="img-responsive d-print-inline-block" src="assets/images/darthSidious.jpg">
+				</div>
+			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12 text-center">
+		<h2>Select A Player</h2>
+	</div>
+</div>
+
+
+<!-- Javascrip and Jquery -->
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>  
+	<script src="assets/javascript/game.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			var playerone;
+			var opponent;
+			var result;
+			var isCalculated;
+
+
+			function initializeGame() {
+				playerone = "";
+				opponent = "";
+				result = "";
+				isCalculated = "";
+
+			}
+		})
+	</script>
+
+</body>
+</html>
