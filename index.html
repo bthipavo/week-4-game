@@ -24,13 +24,13 @@
 				<div class="text-center">
 					<div class="row light">
 						<div class="col-sm-4">
-							<img class="img-responsive d-print-inline-block" src="assets/images/lukeSkywalker.jpg">
+							<button class="btn btn-default btn-lg normal-button lukeButton light"><span> <img src="assets/images/lukeSkywalker.jpg"></span></button>
 						</div>
 						<div class="col-sm-4">
-							<img class="img-responsive d-print-inline-block" src="assets/images/obiWanKenobi.jpg">
+							<button class="btn btn-default btn-lg normal-button obiButton light"><span> <img src="assets/images/obiWanKenobi.jpg"></span></button>
 						</div>
 						<div class="col-sm-4">
-							<img class="img-responsive d-print-inline-block" src="assets/images/yoda.jpg">
+							<button class="btn btn-default btn-lg normal-button yodaButton light"><span> <img src="assets/images/yoda.jpg"></span></button>
 						</div>
 					</div>
 				</div>
@@ -48,19 +48,25 @@
 		<!-- villains -->
 			<div class="row dark">
 				<div class="col-sm-4">
-					<img class="img-responsive d-print-inline-block" src="assets/images/stormTroopers.jpg">
+					<button class="btn btn-default btn-lg normal-button stormButton dark"><span><img class="img-responsive d-print-inline-block" src="assets/images/stormTroopers.jpg"></span></button>
 				</div>
 				<div class="col-sm-4">
-					<img class="img-responsive d-print-inline-block" src="assets/images/darthVader.jpg">
+					<button class="btn btn-default btn-lg normal-button darthButton dark"><span><img class="img-responsive d-print-inline-block" src="assets/images/darthVader.jpg"></span></button>
+					
 				</div>
 				<div class="col-sm-4">
-					<img class="img-responsive d-print-inline-block" src="assets/images/darthSidious.jpg">
+					<button class="btn btn-default btn-lg normal-button sidiousButton dark"><span><img class="img-responsive d-print-inline-block" src="assets/images/darthSidious.jpg"></span></button>
+					
 				</div>
 			</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div id="one"></div>
+	<div id="vs"><h1>VS</h1></div>
+	<div id="opp"></div>
 </div>
 <div class="row">
 	<div class="col-sm-12 text-center">
@@ -83,6 +89,8 @@
 			var opponent;
 			var result;
 			var isCalculated;
+			var darkForce = ['<img src= "assets/images/stormTroopers.jpg">','<img src= "assets/images/darthVader.jpg">','<img src= "assets/images/darthSidious.jpg">'];
+			var lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
 
 
 			function initializeGame() {
@@ -90,8 +98,61 @@
 				opponent = "";
 				result = "";
 				isCalculated = "";
+				darkForce = ['<img src= "assets/images/darthSidious.jpg">','<img src= "assets/images/darthSidious.jpg">','<img src= "assets/images/darthSidious.jpg">'];
+
+				lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
 
 			}
+			$(".lukeButton").on("click", function() {
+				//playerone = luke
+				if(!playerone) {
+					$('#one').html('<img class="img-responsive d-print-inline-block" src="assets/images/lukeSkywalker.jpg">');
+					for(var i = 0; i<darkForce.length; i++) {
+						$('#opp').append(darkForce[i]);
+						console.log(darkForce[i]);
+					}
+					
+
+					//playerone = //light
+					//opponent = dark;
+				}
+				//$("#one").html("hello Luke!");
+				//opponent = dark
+        
+      });
+			$(".obiButton").on("click", function() {
+				//playerone = obi
+				$("#one").html("hello Obi!");
+				//opponent = dark
+        
+      });
+			$(".yodaButton").on("click", function() {
+				//playerone = yoda
+				$("#one").html("hello Yoda!");
+				//opponent = dark
+        
+      });
+			$(".stormButton").on("click", function() {
+				//playerone = storm
+				$("#one").html("hello Trooper!");
+				//opponent = light
+        
+      });
+			$(".darthButton").on("click", function() {
+				//playerone = darth
+				$("#one").html("hello Vader!");
+				//opponent = light
+        
+      });
+			$(".sidiousButton").on("click", function() {
+				//playerone = sidious
+				$("#one").html("hello Sidious!");
+				//opponent = light
+        
+      });
+
+		  
+
 		})
 	</script>
 
