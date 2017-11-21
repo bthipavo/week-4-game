@@ -113,7 +113,12 @@ function getLightOpp(playername) {
 			// console.log('<button class="btn btn-default btn-lg normal-button"><span><img class="img-responsive d-print-inline-block" src="'+ darkForce[i]+'"></span></button>');
 		}	
 }
-
+function gameStats() {
+	$('#gamerhealth').html("player health: " + playerOneHealth);
+	$('#gamerattack').html("player attacks with " + totalAttack+ " damage.");
+	$('#opphealth').html("opponent health: " + totOppHealth);
+	$('#oppattack').html("opponent attacks with " + oppAttack+ " damage.");
+}
 function getEnemyData(elementId) {
 	console.log("getEnemyData");
 		$('#opp').show();
@@ -125,14 +130,8 @@ function getEnemyData(elementId) {
 
 	attackOpp();
 	checkHealth(elementId);
+	gameStats();
 	checkWin();
-
-	console.log("element id: " + elementId);
-	console.log("opponent Health: " + oppHealth);
-	console.log("initial attack: " + playerOneAttack);
-	console.log("player attack: " + totalAttack);
-	console.log("player one health: " + playerOneHealth);
-	console.log("opp remaining health: " + totOppHealth);
 	 
 }
 
@@ -147,43 +146,46 @@ function getEnemyData2(elementId) {
 
 	attackOpp();
 	checkHealth2(elementId);
+	gameStats();
 	checkWin2();
-	
-	console.log("element id: " + elementId);
-	console.log("opponent Health: " + oppHealth);
-	console.log("initial attack: " + playerOneAttack);
-	console.log("player attack: " + totalAttack);
-	console.log("player one health: " + playerOneHealth);
-	console.log("opp remaining health: " + totOppHealth);
-	 
+
 }
 
 function checkWin() {
 	console.log("checkWin");
 	if (playerOneHealth <= 0) {
-		console.log("you lose!");
+		$('#heroResults').show();
+		$('#heroResults').html('Player Loses!');
 		$('#vs').hide();
 		$('.restart').show();
+		$('#selectPlayer').hide();
 	}
 	else
 		if (oppCount >= Object.keys(darkplayers).length){
-			console.log("you win!");
+			$('#heroResults').show();
+			$('#heroResults').html('Player Wins!');
 			$('#vs').hide();
+			$('#selectPlayer').hide();
 			$('.restart').show();
 		}
 }
 function checkWin2() {
 	console.log("checkWin2");
 	if (playerOneHealth <= 0) {
-		console.log("you lose!");
+		$('#heroResults').show();
+		$('#heroResults').html('Player Loses!');
 		$('#vs').hide();
 		$('.restart').show();
+		$('#selectPlayer').hide();
 	}
 	else
 		if (oppCount >= Object.keys(lightplayers).length){
+			$('#heroResults').show();
 			console.log("you win!");
+			$('#heroResults').html('Player Wins!');
 			$('#vs').hide();
 			$('.restart').show();
+			$('#selectPlayer').hide();
 		}
 }
 
@@ -209,6 +211,8 @@ function restartGame() {
 	}
 	$('#selectPlayer').html('<h1>Select Player</h1>');
 	$('.vis').show();
+	$('#selectPlayer').show();
+	$('#heroResults').hide();
 }
 
 function attackOpp() {
@@ -229,6 +233,8 @@ console.log("checkHealth");
 	if (totOppHealth>0) {
 		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+darkplayers[elementId].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[elementId].picture+'"></span></button>');
 		$('#selectPlayer').hide();
+		$('#opphealth').show();
+		$('#oppattack').show();
 		console.log("checking troopers");
 	}
 	else
@@ -236,8 +242,12 @@ console.log("checkHealth");
 			counter = 0;
 			darkplayers[elementId].done = true;
 			oppCount++;
+			$('#selectPlayer').show();
 			$('#'+elementId).remove();
+			$('#opphealth').hide();
+			$('#oppattack').hide();
 			for(var i in darkplayers) {
+
 				if (elementId != darkplayers[i].name && darkplayers[i].done != true){
 					
 					$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
@@ -252,6 +262,8 @@ console.log("checkHealth2");
 	if (totOppHealth>0) {
 		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+lightplayers[elementId].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[elementId].picture+'"></span></button>');
 		$('#selectPlayer').hide();
+		$('#opphealth').show();
+		$('#oppattack').show();
 		console.log("checking troopers");
 	}
 	else
@@ -259,7 +271,10 @@ console.log("checkHealth2");
 			counter = 0;
 			lightplayers[elementId].done = true;
 			oppCount++;
+			$('#selectPlayer').show();
 			$('#'+elementId).remove();
+			$('#opphealth').hide();
+			$('#oppattack').hide();
 			for(var i in lightplayers) {
 				if (elementId != lightplayers[i].name && lightplayers[i].done != true){
 					
