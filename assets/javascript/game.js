@@ -79,48 +79,14 @@ function getDarkOpp(playername) {
 
 function getEnemyData(elementId) {
 	console.log(elementId);
-	if(elementId ==="luke") {
-		oppHealth = lightplayers.luke.healthPower;
-		oppAttack = lightplayers.luke.attackPower;
-		totalAttack +=playerOneAttack;
+	oppHealth = darkplayers[elementId].healthPower;
+	oppAttack = darkplayers[elementId].attackPower;
+	totalAttack +=playerOneAttack;
 
-	}
-	else if(elementId ==="obi") {
-		oppHealth = lightplayers.obi.healthPower;
-		oppAttack = lightplayers.obi.attackPower;
-		totalAttack +=playerOneAttack;
+	attackOpp();
+	checkHealth(elementId);
+	console.log("element id: " + elementId);
 
-	}
-	else if(elementId ==="yoda") {
-		oppHealth = lightplayers.yoda.healthPower;
-		oppAttack = lightplayers.yoda.attackPower;
-		totalAttack +=playerOneAttack;
-
-	}
-	else if(elementId ==="storm") {
-		oppHealth = darkplayers.storm.healthPower;
-		oppAttack = darkplayers.storm.attackPower;
-		totalAttack +=playerOneAttack;
-		playerOneHealth -=oppAttack;
-
-		attackOpp();
-		checkHealth(elementId);
-		console.log("element id: " + elementId);
-
-	}
-	else if(elementId ==="vader") {
-		oppHealth = darkplayers.vader.healthPower;
-		oppAttack = darkplayers.vader.attackPower;
-		totalAttack +=playerOneAttack;
-		console.log("in darthVader");
-
-	}
-	else if(elementId ==="sidious") {
-		oppHealth = darkplayers.sidious.healthPower;
-		oppAttack = darkplayers.sidious.attackPower;
-		totalAttack +=playerOneAttack;
-
-	}
 	console.log("opponent Health: " + oppHealth);
 	console.log("initial attack: " + playerOneAttack);
 	console.log("player attack: " + totalAttack);
