@@ -99,58 +99,15 @@
 
 	<script>
 		$(document).ready(function() {
-			var playerone;
-			var oppId =[];
-			var result;
-			var isCalculated;
-			var playerHealth;
-			var attackPower;
-			var counterAttackPower;
-			var darkForce = ['assets/images/stormTroopers.jpg','assets/images/darthVader.jpg','assets/images/darthSidious.jpg'];
 
-			var lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
 			$('#selectPlayer').html('<h1>Select Player</h1>');
 
-// 			function playmode(){
-
-// 			// if(playerone) {
-// 			// 	console.log("game started");
-// 			// 	$('#selectPlayer').html('<h1>Select who to attack</h1>');
-				
-// 			// }
-// 			// else{
-// 			// 	$('#selectPlayer').html('<h1>Select Player</h1>');
-// 			// }
-// };
-
-			function initializeGame() {
-				playerone = "";
-				opponent = "";
-				result = "";
-				isCalculated = "";
-				// this.playmode(0);
-				darkForce = ['assets/images/darthSidious.jpg','assets/images/darthSidious.jpg','assets/images/darthSidious.jpg'];
-
-				lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
-
-			};
 			$(".lukeButton").on("click", function() {
 				//playerone = luke
 				$('.vis').hide();
 				getDarkOpp("luke");
-
-					//playerone = //light
-					//opponent = dark;
-				
-				//$("#one").html("hello Luke!");
-				//opponent = dark
         
       });
-			// $(".btn").on("click",".oppId", function() {
-
-			// 	console.log("hello");
-
-			// });
 
 			$(".obiButton").on("click", function() {
 				//playerone = obi
