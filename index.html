@@ -15,30 +15,31 @@
 <!-- <h1>Star Wars Game</h1> -->
 <!-- heroes -->
 <div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-6 col-lg-offset-3 vis">
 		<div class="panel panel-default">
-			<div class="panel-heading text-center">
+			<div class="panel-heading text-center ">
 				<h3 class="panel-title">Light</h3>
 			</div>
 			<div class="panel-body">
 				<div class="text-center">
 					<div class="row light">
 						<div class="col-sm-4">
-							<button class="btn btn-default btn-lg normal-button lukeButton light"><span> <img src="assets/images/lukeSkywalker.jpg"></span></button>
+							<button class="btn btn-default btn-lg normal-button lukeButton light"><span> <img class="img-responsive d-print-inline-block" src="assets/images/lukeSkywalker.jpg"></span></button>
 						</div>
 						<div class="col-sm-4">
-							<button class="btn btn-default btn-lg normal-button obiButton light"><span> <img src="assets/images/obiWanKenobi.jpg"></span></button>
+							<button class="btn btn-default btn-lg normal-button obiButton light"><span> <img class="img-responsive d-print-inline-block" src="assets/images/obiWanKenobi.jpg"></span></button>
 						</div>
 						<div class="col-sm-4">
-							<button class="btn btn-default btn-lg normal-button yodaButton light"><span> <img src="assets/images/yoda.jpg"></span></button>
+							<button class="btn btn-default btn-lg normal-button yodaButton light"><span> <img class="img-responsive d-print-inline-block" src="assets/images/yoda.jpg"></span></button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="col-lg-6">
+</div>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-3 vis">
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
 				<h3 class="panel-title">Dark</h3>
@@ -63,14 +64,27 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="one"></div>
-	<div id="vs"><h1>VS</h1></div>
-	<div id="opp"></div>
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+				<div class="panel-body">
+					<div class="panel panel-default">
+						<div id="one"></div>
+						<div class="yellow text-center" id="vs"></div>
+						<!-- <div class="row"> -->
+						<div class="text-center" id="opp"></div>
+						<div id="heroResults"></div>
+						<div id="enemyResults"></div>
+	<!-- 				<div class="col-sm-4" id="opp">
+					</div> -->
+						<!-- </div> -->
+					</div>
+				</div>
+		</div>
 </div>
+</div>
+
 <div class="row">
-	<div class="col-sm-12 text-center">
-		<h2>Select A Player</h2>
+	<div class="col-sm-12 col-sm-offset-5 yellow" id="selectPlayer">
 	</div>
 </div>
 
@@ -86,70 +100,89 @@
 	<script>
 		$(document).ready(function() {
 			var playerone;
-			var opponent;
+			var oppId =[];
 			var result;
 			var isCalculated;
-			var darkForce = ['<img src= "assets/images/stormTroopers.jpg">','<img src= "assets/images/darthVader.jpg">','<img src= "assets/images/darthSidious.jpg">'];
-			var lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
+			var playerHealth;
+			var attackPower;
+			var counterAttackPower;
+			var darkForce = ['assets/images/stormTroopers.jpg','assets/images/darthVader.jpg','assets/images/darthSidious.jpg'];
 
+			var lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
+			$('#selectPlayer').html('<h1>Select Player</h1>');
+
+// 			function playmode(){
+
+// 			// if(playerone) {
+// 			// 	console.log("game started");
+// 			// 	$('#selectPlayer').html('<h1>Select who to attack</h1>');
+				
+// 			// }
+// 			// else{
+// 			// 	$('#selectPlayer').html('<h1>Select Player</h1>');
+// 			// }
+// };
 
 			function initializeGame() {
 				playerone = "";
 				opponent = "";
 				result = "";
 				isCalculated = "";
-				darkForce = ['<img src= "assets/images/darthSidious.jpg">','<img src= "assets/images/darthSidious.jpg">','<img src= "assets/images/darthSidious.jpg">'];
+				// this.playmode(0);
+				darkForce = ['assets/images/darthSidious.jpg','assets/images/darthSidious.jpg','assets/images/darthSidious.jpg'];
 
 				lightForce = ["assets/images/lukeSkywalker.jpg", "assets/images/obiWanKenobi.jpg", "assets/images/yoda.jpg" ];
 
-			}
+			};
 			$(".lukeButton").on("click", function() {
 				//playerone = luke
-				if(!playerone) {
-					$('#one').html('<img class="img-responsive d-print-inline-block" src="assets/images/lukeSkywalker.jpg">');
-					for(var i = 0; i<darkForce.length; i++) {
-						$('#opp').append(darkForce[i]);
-						console.log(darkForce[i]);
-					}
-					
+				$('.vis').hide();
+				getDarkOpp("luke");
 
 					//playerone = //light
 					//opponent = dark;
-				}
+				
 				//$("#one").html("hello Luke!");
 				//opponent = dark
         
       });
+			// $(".btn").on("click",".oppId", function() {
+
+			// 	console.log("hello");
+
+			// });
+
 			$(".obiButton").on("click", function() {
 				//playerone = obi
-				$("#one").html("hello Obi!");
-				//opponent = dark
+				$('.vis').hide();
+				getDarkOpp("obi");
         
       });
 			$(".yodaButton").on("click", function() {
 				//playerone = yoda
-				$("#one").html("hello Yoda!");
-				//opponent = dark
+				$('.vis').hide();
+				getDarkOpp("yoda");
         
       });
 			$(".stormButton").on("click", function() {
 				//playerone = storm
-				$("#one").html("hello Trooper!");
-				//opponent = light
-        
+				$('.vis').hide();
+				getLightOpp("storm");
+       
       });
 			$(".darthButton").on("click", function() {
 				//playerone = darth
-				$("#one").html("hello Vader!");
-				//opponent = light
+				$('.vis').hide();
+				getLightOpp("vader");
         
       });
 			$(".sidiousButton").on("click", function() {
 				//playerone = sidious
-				$("#one").html("hello Sidious!");
-				//opponent = light
+				$('.vis').hide();
+				getLightOpp("sidious");
         
       });
+
 
 		  
 
