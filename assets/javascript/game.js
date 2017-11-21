@@ -47,6 +47,7 @@ var playerOneHealth = 0;
 var totalAttack = 0;
 var opponents = [];
 var totOppHealth =0;
+var counter = 0;
 
 function getDarkOpp(playername) {
 
@@ -78,19 +79,19 @@ function getDarkOpp(playername) {
 
 function getEnemyData(elementId) {
 	console.log(elementId);
-	if(elementId ==="opp2luke") {
+	if(elementId ==="luke") {
 		oppHealth = lightplayers.luke.healthPower;
 		oppAttack = lightplayers.luke.attackPower;
 		totalAttack +=playerOneAttack;
 
 	}
-	else if(elementId ==="opp2obi") {
+	else if(elementId ==="obi") {
 		oppHealth = lightplayers.obi.healthPower;
 		oppAttack = lightplayers.obi.attackPower;
 		totalAttack +=playerOneAttack;
 
 	}
-	else if(elementId ==="opp2yoda") {
+	else if(elementId ==="yoda") {
 		oppHealth = lightplayers.yoda.healthPower;
 		oppAttack = lightplayers.yoda.attackPower;
 		totalAttack +=playerOneAttack;
@@ -102,34 +103,9 @@ function getEnemyData(elementId) {
 		totalAttack +=playerOneAttack;
 		playerOneHealth -=oppAttack;
 
-		if(playerOneAttack < totalAttack) {
-			totOppHealth = totOppHealth - totalAttack;
-		}
-		else {
-			totOppHealth = oppHealth - totalAttack;
-		}
-
+		attackOpp();
+		checkHealth(elementId);
 		console.log("element id: " + elementId);
-			if (totOppHealth>0) {
-				$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+darkplayers[elementId].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[elementId].picture+'"></span></button>');
-				$('#selectPlayer').hide();
-				console.log("checking troopers");
-			}
-			else
-				if(totOppHealth<=0 ) {
-					for(var i in darkplayers) {
-						if (elementId != darkplayers[i].name){
-							$('#'+elementId).remove();
-							$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
-							// $('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
-						}
-					}		
-				}
-
-		$('#enemyResults').html("Health: "+oppHealth);
-		$('#heroResults').html("Remaining Health: "+playerOneHealth);
-		$('#enemyResults').html("Health: "+totOppHealth);
-	
 
 	}
 	else if(elementId ==="vader") {
@@ -139,7 +115,7 @@ function getEnemyData(elementId) {
 		console.log("in darthVader");
 
 	}
-	else if(elementId ==="opp2sidious") {
+	else if(elementId ==="sidious") {
 		oppHealth = darkplayers.sidious.healthPower;
 		oppAttack = darkplayers.sidious.attackPower;
 		totalAttack +=playerOneAttack;
@@ -151,6 +127,34 @@ function getEnemyData(elementId) {
 	console.log("player one health: " + playerOneHealth);
 	console.log("opp remaining health: " + totOppHealth);
 	 
+}
+function attackOpp() {
+		if(counter == 0 ) {
+			totOppHealth = oppHealth - totalAttack;
+			counter++;
+		}
+		else {
+			totOppHealth -= totalAttack;
+			counter++;
+		}
+}
+function checkHealth(elementId) {
+	if (totOppHealth>0) {
+		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+darkplayers[elementId].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[elementId].picture+'"></span></button>');
+		$('#selectPlayer').hide();
+		console.log("checking troopers");
+	}
+	else
+		if(totOppHealth<=0 ) {
+			counter = 0;
+			for(var i in darkplayers) {
+				if (elementId != darkplayers[i].name){
+					$('#'+elementId).remove();
+					$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
+					// $('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
+				}
+			}		
+		}
 }
 
 // function getOppId(){
