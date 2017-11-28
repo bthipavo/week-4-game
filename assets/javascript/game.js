@@ -2,21 +2,21 @@ var lightplayers = {
 	luke: {
 		name: "luke",
 		healthPower: 100,
-		attackPower: 10,
+		attackPower: 6,
 		done: false,
 		picture: "assets/images/lukeSkywalker.jpg"
 	},
 	obi: {
 		name: "obi",
-		healthPower: 100,
-		attackPower: 10,
+		healthPower: 150,
+		attackPower: 8,
 		done: false,
 		picture: "assets/images/obiWanKenobi.jpg"
 	},
 	yoda: {
 		name: "yoda",
-		healthPower: 100,
-		attackPower: 10,
+		healthPower: 200,
+		attackPower: 15,
 		done: false,
 		picture: "assets/images/yoda.jpg"
 	}
@@ -26,21 +26,21 @@ var darkplayers = {
 	storm: {
 		name: "storm",
 		healthPower: 100,
-		attackPower: 10,
+		attackPower: 3,
 		done: false,
 		picture: "assets/images/stormTroopers.jpg"
 	},
 	vader: {
 		name: "vader",
-		healthPower: 100,
-		attackPower: 10,
+		healthPower: 130,
+		attackPower: 9,
 		done: false,
 		picture: "assets/images/darthVader.jpg"
 	},
 	sidious: {
 		name: "sidious",
-		healthPower: 100,
-		attackPower: 10,
+		healthPower: 140,
+		attackPower: 18,
 		done: false,
 		picture: "assets/images/darthSidious.jpg"
 	}
@@ -75,7 +75,8 @@ function getDarkOpp(playername) {
 			playerOneAttack = lightplayers[i].attackPower;
 			playerOneHealth = lightplayers[i].healthPower;
 
-			$('#one').html('<img class="img-responsive d-print-inline-block" src="'+lightplayers[i].picture+'">');
+			$('#one').html('<span><img class="img-responsive d-print-inline-block" src="'+lightplayers[i].picture+'"></span>');
+			$('#originalHealth').html("Original Player Health "+ playerOneHealth);
 		}
 	}
 		$('#vs').html('<h1>VS</h1>');
@@ -83,7 +84,7 @@ function getDarkOpp(playername) {
 		
 
 		for(var i in darkplayers) {
-			$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
+			$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'">Health: '+darkplayers[i].healthPower+'</span></button></div>');
 			// console.log('<button class="btn btn-default btn-lg normal-button"><span><img class="img-responsive d-print-inline-block" src="'+ darkForce[i]+'"></span></button>');
 		}
 }
@@ -101,7 +102,8 @@ function getLightOpp(playername) {
 			playerOneAttack = darkplayers[i].attackPower;
 			playerOneHealth = darkplayers[i].healthPower;
 
-			$('#one').html('<img class="img-responsive d-print-inline-block" src="'+darkplayers[i].picture+'">');
+			$('#one').html('<span><img class="img-responsive d-print-inline-block" src="'+darkplayers[i].picture+'"></span>');
+			$('#originalHealth').html("Original Player Health "+ playerOneHealth);
 		}
 	}
 		$('#vs').html('<h1>VS</h1>');
@@ -109,11 +111,15 @@ function getLightOpp(playername) {
 		
 
 		for(var i in lightplayers) {
-			$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+lightplayers[i].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[i].picture+'"></span></button></div>');
+			$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+lightplayers[i].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[i].picture+'">Health: '+lightplayers[i].healthPower+'</span></button></div>');
 			// console.log('<button class="btn btn-default btn-lg normal-button"><span><img class="img-responsive d-print-inline-block" src="'+ darkForce[i]+'"></span></button>');
 		}	
 }
 function gameStats() {
+	// $('#gameStats1').show();
+	$('#gamerattack').show();
+	$('#gamerhealth').show();
+	$('#originalHealth').show();
 	$('#gamerhealth').html("player health: " + playerOneHealth);
 	$('#gamerattack').html("player attacks with " + totalAttack+ " damage.");
 	$('#opphealth').html("opponent health: " + totOppHealth);
@@ -131,7 +137,7 @@ function getEnemyData(elementId) {
 	attackOpp();
 	checkHealth(elementId);
 	gameStats();
-	checkWin();
+	checkWin(elementId);
 	 
 }
 
@@ -147,11 +153,11 @@ function getEnemyData2(elementId) {
 	attackOpp();
 	checkHealth2(elementId);
 	gameStats();
-	checkWin2();
+	checkWin2(elementId);
 
 }
 
-function checkWin() {
+function checkWin(elementId) {
 	console.log("checkWin");
 	if (playerOneHealth <= 0) {
 		$('#heroResults').show();
@@ -159,6 +165,9 @@ function checkWin() {
 		$('#vs').hide();
 		$('.restart').show();
 		$('#selectPlayer').hide();
+		$('#'+elementId).remove();
+		$('#opphealth').hide();
+		$('#oppattack').hide();
 	}
 	else
 		if (oppCount >= Object.keys(darkplayers).length){
@@ -169,7 +178,7 @@ function checkWin() {
 			$('.restart').show();
 		}
 }
-function checkWin2() {
+function checkWin2(elementId) {
 	console.log("checkWin2");
 	if (playerOneHealth <= 0) {
 		$('#heroResults').show();
@@ -177,6 +186,9 @@ function checkWin2() {
 		$('#vs').hide();
 		$('.restart').show();
 		$('#selectPlayer').hide();
+		$('#'+elementId).remove();
+		$('#opphealth').hide();
+		$('#oppattack').hide();
 	}
 	else
 		if (oppCount >= Object.keys(lightplayers).length){
@@ -213,6 +225,12 @@ function restartGame() {
 	$('.vis').show();
 	$('#selectPlayer').show();
 	$('#heroResults').hide();
+	$('#gamerattack').hide();
+	$('#gamerhealth').hide();
+	$('#opphealth').hide();
+	$('#oppattack').hide();
+	$('#originalHealth').hide();
+	// $('#gameStats1').hide();
 }
 
 function attackOpp() {
@@ -231,7 +249,7 @@ function attackOpp() {
 function checkHealth(elementId) {
 console.log("checkHealth");
 	if (totOppHealth>0) {
-		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+darkplayers[elementId].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[elementId].picture+'"></span></button>');
+		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+darkplayers[elementId].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[elementId].picture+'">Attack</span></button>');
 		$('#selectPlayer').hide();
 		$('#opphealth').show();
 		$('#oppattack').show();
@@ -250,7 +268,7 @@ console.log("checkHealth");
 
 				if (elementId != darkplayers[i].name && darkplayers[i].done != true){
 					
-					$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
+					$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'">Health: '+darkplayers[i].healthPower+'</span></button></div>');
 					// $('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+darkplayers[i].name+'" onclick="getEnemyData(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ darkplayers[i].picture+'"></span></button></div>');
 				}
 			}		
@@ -260,7 +278,7 @@ console.log("checkHealth");
 function checkHealth2(elementId) {
 console.log("checkHealth2");
 	if (totOppHealth>0) {
-		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+lightplayers[elementId].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[elementId].picture+'"></span></button>');
+		$('#opp').html('<button class="btn btn-default btn-lg normal-button" id="'+lightplayers[elementId].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[elementId].picture+'">Attack</span></button>');
 		$('#selectPlayer').hide();
 		$('#opphealth').show();
 		$('#oppattack').show();
@@ -278,7 +296,7 @@ console.log("checkHealth2");
 			for(var i in lightplayers) {
 				if (elementId != lightplayers[i].name && lightplayers[i].done != true){
 					
-					$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+lightplayers[i].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[i].picture+'"></span></button></div>');
+					$('#opp').append('<div class="col-sm-4"><button class="btn btn-default btn-lg normal-button" id="'+lightplayers[i].name+'" onclick="getEnemyData2(this.id)"><span><img class="img-responsive d-print-inline-block" src="'+ lightplayers[i].picture+'">Health: '+lightplayers[i].healthPower+'</span></button></div>');
 				}
 			}		
 		}
